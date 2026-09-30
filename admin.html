@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turqstore | Başvuru Yönetim Paneli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/jpeg" href="assets/images/turqstore_logo_emblem.jpg">
+  <style>
+    body {
+      background-color: #070a11;
+      padding: 2rem 0;
+    }
+    .admin-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .admin-stat-card {
+      padding: 1.4rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+    }
+    .admin-stat-val {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--turq-400);
+      line-height: 1.1;
+    }
+    .admin-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+    .admin-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .admin-toolbar {
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .search-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      width: 280px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1rem 1.2rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+    td {
+      padding: 1.1rem 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: rgba(45, 212, 191, 0.03);
+    }
+    .badge-status {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge-status.new {
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--turq-400);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+    }
+    .action-btn {
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s;
+    }
+    .action-btn:hover {
+      background: rgba(45, 212, 191, 0.2);
+      border-color: var(--turq-400);
+      color: var(--turq-400);
+    }
+    .empty-state {
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-container">
+    <!-- Admin Header -->
+    <div class="admin-header">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="brand-emblem-wrap" style="width: 44px; height: 44px;">
+          <img src="assets/images/turqstore_logo_emblem.jpg" alt="Turqstore">
+        </div>
+        <div>
+          <h1 style="font-size: 1.4rem; font-weight: 800; color: #fff;">Turqstore Başvuru Yönetim Masası</h1>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Gelen Marka İş Ortaklığı ve İhracat Talepleri</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.8rem; align-items: center;">
+        <a href="index.html" class="btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+          ← Web Sitesine Dön
+        </a>
+        <button class="btn-primary" id="exportCsvBtn" style="font-size: 0.85rem; padding: 0.5rem 1.2rem;">
+          📥 Excel / CSV Olarak İndir
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-val" id="totalLeadsCount">0</div>
+        <div class="admin-stat-label">Toplam Başvuru</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-val" style="color: var(--gold-400);" id="newLeadsCount">0</div>
+        <div class="admin-stat-label">Bekleyen / İncelenecek</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-val" style="color: #38bdf8;" id="popularMarket">-</div>
+        <div class="admin-stat-label">En Çok Talep Gören Pazar</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-val" style="color: #10b981;">24 Saat</div>
+        <div class="admin-stat-label">Hedef Dönüş Süresi</div>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="admin-table-card">
+      <div class="admin-toolbar">
+        <input type="text" id="searchInput" class="search-input" placeholder="Marka, yetkili veya kod ara...">
+        <div style="font-size: 0.82rem; color: var(--text-dim);" id="tableSummaryText">
+          Görüntülenen: 0 kayıt
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Takip Kodu</th>
+              <th>Tarih</th>
+              <th>Marka / Şirket</th>
+              <th>Yetkili</th>
+              <th>İletişim</th>
+              <th>Kategori</th>
+              <th>Hedef Koridor</th>
+              <th>Durum</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody">
+            <!-- Dynamic rows will be rendered here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--text-dim); margin-bottom: 0.8rem;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <p>Henüz kayıtlı başvuru bulunmuyor veya arama kriteriyle eşleşmedi.</p>
+      </div>
+    </div>
+
+    <!-- Setup / Integration Guide -->
+    <div class="glass-panel" style="margin-top: 2rem; padding: 1.8rem;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--turq-400);">
+        💡 Başvuruların Otomatik E-Posta veya WhatsApp'a Düşmesi İçin:
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+        Şu anda tüm başvurular yerel tarayıcı belleğinizde saklanmakta ve bu panelde anında listelenmektedir. Canlıya aldığınızda başvuruların doğrudan <b>kendi e-posta kutunuza</b> veya <b>WhatsApp hattınıza</b> gelmesini isterseniz:
+      </p>
+      <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;">
+        <li><b>E-Posta Yönlendirme (Ücretsiz)</b>: Formspree, Resend veya EmailJS gibi bir servisle saniyeler içinde doğrudan kurumsal veya kişisel e-posta adresinize bağlayabiliriz.</li>
+        <li><b>WhatsApp Bildirimi</b>: Başvuran firmanın bilgilerini tek tıkla doğrudan WhatsApp destek hattınıza açabiliriz.</li>
+        <li><b>Google Sheets (Excel)</b>: Her başvuru otomatik olarak Google E-Tablonuza yeni bir satır olarak kaydedilebilir.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Sample initial data if localStorage is completely empty
+    function getStoredLeads() {
+      const data = localStorage.getItem('turqstore_leads');
+      if (!data || JSON.parse(data).length === 0) {
+        // Provide sample entries for presentation
+        const samples = [
+          {
+            refCode: 'TRQ-777058',
+            brandName: 'Anadolu Dokuma Tekstil Ltd.',
+            contactName: 'Mehmet Demir',
+            email: 'mehmet@anadoludokuma.com',
+            phone: '+90 532 555 12 34',
+            category: 'textile',
+            targetMarket: 'uk',
+            website: 'https://anadoludokuma.com',
+            volume: '1.500 Adet/Ay',
+            notes: 'Ege pamuğu organik havlu ve bornoz serisi üreticisiyiz. İngiltere pazarında büyümek istiyoruz.',
+            status: 'Yeni',
+            timestamp: new Date().toISOString()
+          },
+          {
+            refCode: 'TRQ-492104',
+            brandName: 'Zeytinbağı Gurme Lezzetler',
+            contactName: 'Ayşe Kaya',
+            email: 'info@zeytinbagigurme.com',
+            phone: '+90 544 333 88 99',
+            category: 'gourmet',
+            targetMarket: 'mena',
+            website: 'https://zeytinbagi.com.tr',
+            volume: '3.000 Şişe/Ay',
+            notes: 'Erken hasat soğuk sıkım Ayvalık zeytinyağı ve trüflü gurme serimiz mevcut.',
+            status: 'Yeni',
+            timestamp: new Date(Date.now() - 3600000 * 4).toISOString()
+          }
+        ];
+        localStorage.setItem('turqstore_leads', JSON.stringify(samples));
+        return samples;
+      }
+      return JSON.parse(data);
+    }
+
+    const categoryNames = {
+      textile: '🧵 Ev Tekstili',
+      leather: '👜 Deri & Aksesuar',
+      gourmet: '🫒 Gurme Gıda',
+      kitchen: '🏺 Mutfak & Züccaciye',
+      cosmetics: '🌸 Kozmetik',
+      other: '📦 Diğer'
+    };
+
+    const marketNames = {
+      all: '🌍 Tüm Tüneller',
+      uk: '🇬🇧 İngiltere',
+      usa: '🇺🇸 ABD',
+      mena: '🇸🇦 Körfez & SA',
+      africa: '🌍 Afrika'
+    };
+
+    function renderLeads() {
+      const leads = getStoredLeads();
+      const tbody = document.getElementById('leadsTableBody');
+      const emptyState = document.getElementById('emptyState');
+      const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      const filtered = leads.filter(item => {
+        const text = `${item.refCode} ${item.brandName} ${item.contactName} ${item.email} ${item.phone}`.toLowerCase();
+        return text.includes(searchVal);
+      });
+
+      // Update counters
+      document.getElementById('totalLeadsCount').textContent = leads.length;
+      document.getElementById('newLeadsCount').textContent = leads.filter(l => l.status === 'Yeni').length;
+      document.getElementById('tableSummaryText').textContent = `Görüntülenen: ${filtered.length} kayıt`;
+
+      // Most popular market
+      const marketCounts = {};
+      leads.forEach(l => {
+        marketCounts[l.targetMarket] = (marketCounts[l.targetMarket] || 0) + 1;
+      });
+      let topMarket = 'İngiltere / ABD';
+      let maxC = 0;
+      for (const m in marketCounts) {
+        if (marketCounts[m] > maxC) {
+          maxC = marketCounts[m];
+          topMarket = marketNames[m] || m;
+        }
+      }
+      document.getElementById('popularMarket').textContent = topMarket;
+
+      tbody.innerHTML = '';
+      if (filtered.length === 0) {
+        emptyState.style.display = 'block';
+        return;
+      }
+      emptyState.style.display = 'none';
+
+      filtered.forEach((lead, idx) => {
+        const tr = document.createElement('tr');
+        const dateStr = new Date(lead.timestamp).toLocaleDateString('tr-TR', {
+          day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+
+        tr.innerHTML = `
+          <td><b style="color: var(--turq-400);">${lead.refCode || 'TRQ-KOD'}</b></td>
+          <td style="color: var(--text-dim); font-size: 0.8rem;">${dateStr}</td>
+          <td><b>${lead.brandName}</b><br><small style="color: var(--text-muted);">${lead.volume || ''}</small></td>
+          <td>${lead.contactName}</td>
+          <td>
+            <a href="mailto:${lead.email}" style="color: #38bdf8;">${lead.email}</a><br>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">${lead.phone}</span>
+          </td>
+          <td>${categoryNames[lead.category] || lead.category}</td>
+          <td><b>${marketNames[lead.targetMarket] || lead.targetMarket}</b></td>
+          <td><span class="badge-status new">${lead.status || 'Yeni'}</span></td>
+          <td>
+            <div style="display: flex; gap: 0.4rem;">
+              <a class="action-btn" href="https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=Merhaba%20${encodeURIComponent(lead.contactName)},%20Turqstore%20ihracat%20başvurunuzu%20(${lead.refCode})%20aldık." target="_blank" title="WhatsApp ile Yaz">
+                💬 WhatsApp
+              </a>
+              <a class="action-btn" href="mailto:${lead.email}?subject=Turqstore%20İhracat%20İş%20Ortaklığı%20-${lead.refCode}" title="E-Posta Gönder">
+                ✉️ E-posta
+              </a>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', renderLeads);
+
+    // Export to CSV
+    document.getElementById('exportCsvBtn').addEventListener('click', () => {
+      const leads = getStoredLeads();
+      if (leads.length === 0) {
+        alert('İndirilecek başvuru bulunmuyor.');
+        return;
+      }
+
+      let csv = '\uFEFF'; // BOM for Excel Turkish character compatibility
+      csv += 'Takip Kodu;Tarih;Marka Adı;Yetkili;E-Posta;Telefon;Kategori;Hedef Pazar;Kapasite;Notlar\n';
+
+      leads.forEach(l => {
+        csv += `"${l.refCode || ''}";"${l.timestamp || ''}";"${l.brandName || ''}";"${l.contactName || ''}";"${l.email || ''}";"${l.phone || ''}";"${l.category || ''}";"${l.targetMarket || ''}";"${l.volume || ''}";"${(l.notes || '').replace(/"/g, '""')}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Turqstore_Basvurular_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    renderLeads();
+  </script>
+</body>
+</html>
