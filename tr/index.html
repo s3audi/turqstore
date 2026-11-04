@@ -22,10 +22,15 @@ h1,h2,h3{font-family:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif
 a{color:var(--tile)}
 :focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+header{display:flex;align-items:center;padding:22px 0;gap:22px}
+.logo{margin-right:auto}
+nav{display:flex;gap:22px;order:1}
+.lang{order:2;display:flex;line-height:0}
+.lang svg{display:block;border-radius:3px;box-shadow:0 0 0 1px var(--line)}
+.short{display:none}
 .logo{font:800 22px "Bricolage Grotesque",sans-serif;text-decoration:none;color:var(--ink)}
 .logo span{color:var(--teal)}
-nav a{margin-left:22px;color:var(--ink);text-decoration:none;font-weight:500}
+nav a{color:var(--ink);text-decoration:none;font-weight:500;padding:6px 0}
 nav a:hover{text-decoration:underline}
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:56px 0 72px}
 h1{font-size:clamp(36px,5.6vw,64px);font-weight:800;letter-spacing:-.02em}
@@ -71,7 +76,7 @@ input[type=email]{flex:1 1 260px;padding:14px 16px;border-radius:8px;border:2px 
 #privacy h2{font-size:24px}
 #privacy p{max-width:44em;color:var(--muted);font-size:15.5px}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:15px}
-@media(max-width:820px){.hero,.apps,.steps{grid-template-columns:1fr}nav a{margin-left:14px}.hero{padding-top:28px}}
+@media(max-width:820px){.hero,.apps,.steps{grid-template-columns:1fr}header{flex-wrap:wrap;gap:12px 0;padding:16px 0}.lang{order:1}nav{order:2;flex-basis:100%;gap:28px}.full{display:none}.short{display:inline}.hero{padding-top:28px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -79,7 +84,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
 <div class="wrap">
 <header>
   <a class="logo" href="#top">Turq<span>store</span></a>
-  <nav aria-label="Ana menü"><a href="#apps">Uygulamalar</a><a href="#how">Nasıl çalışıyoruz</a><a href="#early-access">Erken erişim</a><a href="/" hreflang="en" lang="en">English</a></nav>
+  <nav aria-label="Ana menü"><a href="#apps">Uygulamalar</a><a href="#how"><span class="full">Nasıl çalışıyoruz</span><span class="short">Nasıl</span></a><a href="#early-access"><span class="full">Erken erişim</span><span class="short">Erişim</span></a></nav>
+  <a class="lang" href="/" hreflang="en" lang="en" aria-label="English" title="English"><svg width="28" height="19" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0 0L60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" stroke-width="3"/><path d="M30 0V40M0 20H60" stroke="#fff" stroke-width="12"/><path d="M30 0V40M0 20H60" stroke="#C8102E" stroke-width="7"/></svg></a>
 </header>
 <main id="top">
 <div class="hero">
