@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turqstore – AI apps that take Turkish products to the world</title>
+<meta name="description" content="Turqstore builds small, connected AI apps for Turkish manufacturers who want to sell abroad. First app: Listing Studio.">
+<link rel="canonical" href="https://turqstore.com/">
+<link rel="alternate" hreflang="en" href="https://turqstore.com/">
+<link rel="alternate" hreflang="tr" href="https://turqstore.com/tr/">
+<link rel="alternate" hreflang="x-default" href="https://turqstore.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231AA6A0'/><text x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'>T</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2F7F6;--ink:#0C2B33;--muted:#4A6269;--teal:#1AA6A0;--tile:#1D4E89;--line:#CFDDDB;--white:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 "Hanken Grotesk",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;line-height:1.1;margin:0}
+a{color:var(--tile)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font:800 22px "Bricolage Grotesque",sans-serif;text-decoration:none;color:var(--ink)}
+.logo span{color:var(--teal)}
+nav a{margin-left:22px;color:var(--ink);text-decoration:none;font-weight:500}
+nav a:hover{text-decoration:underline}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:56px 0 72px}
+h1{font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:20px;color:var(--muted);max-width:34em;margin:22px 0 30px}
+.btn{display:inline-block;background:var(--ink);color:var(--white);padding:14px 26px;border-radius:8px;font-weight:600;text-decoration:none;border:0;font-size:17px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--tile)}
+.demo{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.demo .row{padding:18px 20px}
+.demo .row+.row{border-top:1px solid var(--line)}
+.demo small{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
+.demo p{margin:0;font-size:15.5px}
+.demo .out{background:#E9F6F5}
+.demo .out strong{font-family:"Bricolage Grotesque",sans-serif;font-size:17px;display:block;margin-bottom:6px}
+.tiles{height:26px;background:
+ conic-gradient(from 45deg at 50% 50%,var(--tile) 0 25%,var(--teal) 0 50%,var(--tile) 0 75%,var(--teal) 0) 0 0/26px 26px}
+section{padding:72px 0}
+h2{font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-.01em;margin-bottom:14px}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.app{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px}
+.app h3{font-size:22px;margin-bottom:6px}
+.app p{margin:0 0 14px;color:var(--muted);font-size:16px}
+.status{font-weight:600;font-size:15px}
+.status.now{color:var(--teal)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s}
+.steps div{border-top:3px solid var(--teal);padding-top:14px}
+.steps h3{font-size:20px;margin-bottom:6px}
+.steps p{margin:0;color:var(--muted);font-size:16px}
+.signup{background:var(--ink);color:var(--white)}
+.signup .sub{color:#B9CDD0}
+form{display:flex;gap:12px;flex-wrap:wrap;max-width:560px}
+input[type=email]{flex:1 1 260px;padding:14px 16px;border-radius:8px;border:2px solid transparent;font:inherit}
+.signup .btn{background:var(--teal);color:var(--ink)}
+.signup .btn:hover{background:#4CC4BE}
+.note{font-size:14px;color:#B9CDD0;margin-top:12px;max-width:560px}
+#privacy{padding:48px 0}
+#privacy h2{font-size:24px}
+#privacy p{max-width:44em;color:var(--muted);font-size:15.5px}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:15px}
+@media(max-width:820px){.hero,.apps,.steps{grid-template-columns:1fr}nav a{margin-left:14px}.hero{padding-top:28px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="logo" href="#top">Turq<span>store</span></a>
+  <nav aria-label="Main"><a href="#apps">Apps</a><a href="#how">How we work</a><a href="#early-access">Early access</a><a href="/tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+</header>
+<main id="top">
+<div class="hero">
+  <div>
+    <h1>AI apps that take Turkish products abroad</h1>
+    <p class="lead">Turkish manufacturers make products the world wants, then lose sales to language, paperwork and marketplace rules. We are building small apps that each fix one of those jobs and work together.</p>
+    <a class="btn" href="#early-access">Get early access</a>
+  </div>
+  <div class="demo" aria-label="Illustrative example of Listing Studio">
+    <div class="row"><small>You paste a Turkish product description</small><p>Ege pamuğu, %100 pamuk, el dokuması peştemal, 100x180 cm, saçaklı.</p></div>
+    <div class="row out"><small>Listing Studio returns an English listing</small><strong>Hand-Woven Turkish Cotton Peshtemal Towel, 100x180 cm, Fringed</strong><p>100% Aegean cotton, lightweight and quick-drying. Suggested customs heading: 6302 (to be confirmed with a customs broker).</p></div>
+    <div class="row"><small>Illustrative example, not a live customer listing</small></div>
+  </div>
+</div>
+</main>
+</div>
+<div class="tiles" role="presentation"></div>
+
+<section id="apps"><div class="wrap">
+  <h2>One account, one product catalog, many small apps</h2>
+  <p class="sub">A manufacturer sets up once. Every app reads the same catalog, so each new app starts with your products already in it.</p>
+  <div class="apps">
+    <div class="app"><h3>Listing Studio</h3><p>Turns Turkish product descriptions into marketplace-ready English listings. Built on Claude.</p><span class="status now">In development</span></div>
+    <div class="app"><h3>Compliance Check</h3><p>Suggests customs codes and flags missing documents for the destination country.</p><span class="status">Planned</span></div>
+    <div class="app"><h3>Support Inbox</h3><p>Drafts customer replies in the buyer’s language for a person to review.</p><span class="status">Planned</span></div>
+  </div>
+</div></section>
+
+<section id="how" style="background:var(--white)"><div class="wrap">
+  <h2>We test on ourselves first</h2>
+  <p class="sub">Each app is proven on real orders before we ask anyone to rely on it.</p>
+  <div class="steps">
+    <div><h3>Our own UK store</h3><p>We run a Shopify store for the UK market and use it to test listings, shipping and customer questions end to end.</p></div>
+    <div><h3>Turkish manufacturers</h3><p>Once the workflow works, we list products with Turkish manufacturers and measure the results with them.</p></div>
+    <div><h3>Apps for everyone</h3><p>The proven workflow becomes a management app. Later, other Turkish software teams can connect their apps to the same foundation.</p></div>
+  </div>
+</div></section>
+
+<section id="early-access" class="signup"><div class="wrap">
+  <h2>Get early access</h2>
+  <p class="sub">Leave your email and we will write to you when Listing Studio opens.</p>
+  <form id="f">
+    <label for="email" style="position:absolute;left:-9999px">Email address</label>
+    <input id="email" type="email" required placeholder="you@company.com" autocomplete="email">
+    <button class="btn" type="submit">Request early access</button>
+  </form>
+  <p class="note">This opens your email app with a ready message to us. We use your address only to contact you about early access. <a href="#privacy" style="color:#fff">Privacy</a></p>
+</div></section>
+
+<section id="privacy"><div class="wrap">
+  <h2>Privacy</h2>
+  <p>When you request early access we receive your email address. We use it only to contact you about Turqstore and do not sell or share it. To see or delete what we hold about you, email info@turqstore.com.</p>
+</div></section>
+
+<footer><div class="wrap">
+  TURQSTORE LTD · Registered in England and Wales, company number 17142819 · <a href="mailto:info@turqstore.com">info@turqstore.com</a>
+</div></footer>
+<script>
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var m=document.getElementById('email').value;
+  location.href='mailto:info@turqstore.com?subject='+encodeURIComponent('Early access request')+'&body='+encodeURIComponent('Please add me to the early access list: '+m);
+});
+</script>
+</body>
+</html>
